@@ -1,0 +1,93 @@
+<h1 *ngIf="isLogged">Welcome!</h1>
+<button *ngIf="isLogged" (click)="sighOut()">Sign out</button>
+<h1 *ngIf="!isLogged">Please sign in/register</h1>
+
+<h2 *ngIf="!isLogged">Login form</h2>
+
+<form *ngIf="!isLogged" #loginForm="ngForm" (ngSubmit)="sendLoginUserData(email.value, password.value)">
+
+  <label>Email: </label>
+
+  <input type="email"
+         required
+         name="email"
+         #email="ngModel"
+         placeholder="example@example.com"
+         ngModel
+  >
+
+  <br>
+  <br>
+
+  <label>Password: </label>
+
+  <input type="password"
+         required
+         name="password"
+         #password="ngModel"
+         placeholder="********"
+         ngModel
+  >
+
+
+  <p *ngIf="!correctPassword">Invalid password</p>
+
+  <br *ngIf="correctPassword">
+  <br *ngIf="correctPassword">
+
+  <button [disabled]="loginForm.invalid">Sign in</button>
+
+</form>
+
+
+<h2 *ngIf="!isLogged && !isRegistered">Register form</h2>
+
+<form *ngIf="!isLogged && !isRegistered" #registerForm="ngForm"  (ngSubmit)="sendNewUserData(name.value, email.value, password.value)">
+
+  <label>Name: </label>
+
+  <input type="text"
+         required
+         name="name"
+         #name="ngModel"
+         placeholder="Alex"
+         ngModel
+  >
+
+  <br>
+  <br>
+
+  <label>Email: </label>
+
+  <input type="email"
+         required
+         name="email"
+         #email="ngModel"
+         placeholder="alex@example.com"
+         ngModel
+  >
+
+  <br>
+  <br>
+
+  <label>Password: </label>
+
+  <input type="password"
+         required
+         name="password"
+         #password="ngModel"
+         placeholder="********"
+         ngModel
+  >
+
+  <p *ngIf="emailAlreadyExist">Email is already exist</p>
+
+  <br *ngIf="!emailAlreadyExist">
+  <br *ngIf="!emailAlreadyExist">
+
+  <button [disabled]="registerForm.invalid">Send</button>
+
+</form>
+
+
+<router-outlet *ngIf="isLogged"></router-outlet>

@@ -1,0 +1,34 @@
+<br>
+<label>Employee name: </label>
+<label>
+  <input type="text"
+         #search
+         name = "search"
+  >
+</label>
+<button (click)="searchEmployees(search.value)">Search</button>
+
+
+<table>
+  <caption>List of employees</caption>
+  <tr>
+    <th>id</th>
+    <th>name</th>
+    <th>active</th>
+    <th>department</th>
+  </tr>
+
+  <tr *ngFor="let employee of pageOfEmployees">
+    <td>{{employee.id}}</td>
+    <td>{{employee.name}}</td>
+    <td>{{employee.active}}</td>
+    <td>{{employee.Department.name}}</td>
+    <td><a routerLink="edit/{{employee.id}}">Edit</a></td>
+    <td><a (click)="deleteEmployee(employee)" style="cursor: pointer">Delete</a></td>
+  </tr>
+  <jw-pagination [items]="employees" (changePage)="onChangePage($event)" [pageSize]="4" style="cursor: pointer"></jw-pagination>
+</table>
+
+<a routerLink="/create">Add new employee</a>
+
+
